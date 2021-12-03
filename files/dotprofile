@@ -1,0 +1,20 @@
+#Curl proxy
+#export http_proxy=http://ip:port
+#export https_proxy=http://ip:port
+
+#LLVM
+export PATH="/usr/local/llvm/bin:/usr/local/clangd/bin:$PATH"
+export LDFLAGS="`llvm-config --ldflags`"
+#For compilers to find llvm you may need to set:
+export CPPFLAGS="-isysroot $SDKROOT `llvm-config --cppflags`"
+export CXXFLAGS="-Wall -Wextra -isysroot $SDKROOT `llvm-config --cxxflags`"
+#Add llvm lib to LD_LIBRARY_PATH
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/llvm/lib"
+
+#alias nvim to vi
+alias vi='nvim'
+alias v='nvim'
+#set vi as the terminal editor
+set -o vi
+
+. "$HOME/.cargo/env"

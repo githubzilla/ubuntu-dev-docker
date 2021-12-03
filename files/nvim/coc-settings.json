@@ -1,0 +1,8 @@
+{
+	"tsserver.enable": false,
+        "clangd.enabled": false,
+        "clangd.arguments": [],
+        "rust-analyzer.server.path": "~/.cargo/bin/rust-analyzer",
+        "rust-client.logToFile": "~/coc-rls.log",
+        "rust-analyzer.debug.vimspector.configuration.name": "rust - lldb"
+}
