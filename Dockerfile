@@ -1,6 +1,7 @@
 FROM ubuntu:latest
 LABEL maintainer="githubzilla"
 
+ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update
 RUN apt-get install -y sudo
 RUN apt-get install -y iputils-ping
@@ -17,8 +18,7 @@ RUN apt-get install -y build-essential
 RUN apt-get install -y software-properties-common
 RUN add-apt-repository ppa:neovim-ppa/unstable
 RUN apt-get update
-RUN apt-get install neovim
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh 
+RUN apt-get install -y neovim
 
 #add developer user account
 RUN adduser --quiet --disabled-password --shell /bin/zsh --home /home/devuser --gecos "User" devuser && \
@@ -28,18 +28,34 @@ RUN adduser --quiet --disabled-password --shell /bin/zsh --home /home/devuser --
 USER devuser
 WORKDIR /home/devuser
 
+#Install rust
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > /home/devuser/rustup.sh 
+RUN chmod +x /home/devuser/rustup.sh
+RUN /home/devuser/rustup.sh -y
+RUN rm /home/devuser/rustup.sh
+RUN . /home/devuser/.cargo/env && rustup toolchain install nightly
+RUN . /home/devuser/.cargo/env && rustup default nightly
+
 #setup oh-my-zsh
-ENV REMOTE=https://www.github.com/ohmyzsh/ohmyzsh.git
-RUN wget https://www.github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
+RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
 RUN git clone https://github.com/zsh-users/zsh-autosuggestions /home/devuser/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-RUN git clone https://www.github.com/romkatv/powerlevel10k.git
+RUN git clone https://github.com/romkatv/powerlevel10k.git
 # run gitstatusd install when docker build rather than postpone to the actuall run time  
 RUN /home/devuser/powerlevel10k/gitstatus/install
 
-#add config files
+#add oh-my-zsh config files
 ADD files/dotzshrc /home/devuser/.zshrc
 ADD files/dotp10k.zsh /home/devuser/.p10k.zsh
 ADD files/dotprofile /home/devuser/.profile
+
+#Install vim-plug for neovim
+RUN sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+#add neovim config files
+ADD files/nvim /home/devuser/.config/
+#run plug install
+RUN nvim --headless +PlugInstall +qall
+
 ENV TERM xterm-256color
 CMD ["zsh"]
 
