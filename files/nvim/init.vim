@@ -108,59 +108,59 @@ Plug 'tpope/vim-unimpaired'
 call plug#end()
 
 "== autosave.vim ==
-source ~/.config/nvim/autosave.vim
+silent! source ~/.config/nvim/autosave.vim
 
 "== vim-airline.vim ==
-source ~/.config/nvim/vim-airline.vim
+silent! source ~/.config/nvim/vim-airline.vim
 
 "== nerdtree
-source ~/.config/nvim/nerdtree.vim
+silent! source ~/.config/nvim/nerdtree.vim
 
 "== nvim tree ==
 "source ~/.config/nvim/nvim-tree.vim
 
 "== ranger.vim ==
-source ~/.config/nvim/ranger.vim
+silent! source ~/.config/nvim/ranger.vim
 
 "== nerdcommenter ==
-source ~/.config/nvim/nerdcommenter.vim
+silent! source ~/.config/nvim/nerdcommenter.vim
 
 "== dash.vim ==
-source ~/.config/nvim/dash.vim
+silent! source ~/.config/nvim/dash.vim
 
 "== telescope.vim ==
-source ~/.config/nvim/telescope.vim
+silent! source ~/.config/nvim/telescope.vim
 
 "== treesitter ==
-source ~/.config/nvim/treesitter.vim
+silent! source ~/.config/nvim/treesitter.vim
 
 "== sneak ==
-source ~/.config/nvim/sneak.vim
+silent! source ~/.config/nvim/sneak.vim
 
 "== mundo ==
-source ~/.config/nvim/localhistory.vim
+silent! source ~/.config/nvim/localhistory.vim
 
 "== rust-tools.vim
-source ~/.config/nvim/rust-tools.vim
+silent! source ~/.config/nvim/rust-tools.vim
 
 "== nvim-lspconfig
-source ~/.config/nvim/lspconfig.vim
+silent! source ~/.config/nvim/lspconfig.vim
 
 "== lsp signature
-source ~/.config/nvim/lsp_signature.vim
+silent! source ~/.config/nvim/lsp_signature.vim
 
 "== nvim-cmp.vim
-source ~/.config/nvim/nvim-cmp.vim
+silent! source ~/.config/nvim/nvim-cmp.vim
 
 "== ccls.vim
 "source ~/.config/nvim/ccls.vim
 
 "==basic vim settings in vim.vim ==
-source ~/.config/nvim/vim.vim
+silent! source ~/.config/nvim/vim.vim
 
 "== which key
-source ~/.config/nvim/which_key.vim
+silent! source ~/.config/nvim/which_key.vim
 
 "== ctrlspace
-source ~/.config/nvim/vim-ctrlspace.vim
+silent! source ~/.config/nvim/vim-ctrlspace.vim
 

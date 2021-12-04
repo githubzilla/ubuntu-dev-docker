@@ -44,17 +44,20 @@ RUN git clone https://github.com/romkatv/powerlevel10k.git
 RUN /home/devuser/powerlevel10k/gitstatus/install
 
 #add oh-my-zsh config files
-ADD files/dotzshrc /home/devuser/.zshrc
-ADD files/dotp10k.zsh /home/devuser/.p10k.zsh
-ADD files/dotprofile /home/devuser/.profile
+ADD --chown=devuser:devuser files/dotzshrc /home/devuser/.zshrc
+ADD --chown=devuser:devuser files/dotp10k.zsh /home/devuser/.p10k.zsh
+ADD --chown=devuser:devuser files/dotprofile /home/devuser/.profile
 
 #Install vim-plug for neovim
 RUN sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 #add neovim config files
-ADD files/nvim /home/devuser/.config/
+ADD --chown=devuser:devuser files/nvim /home/devuser/.config/nvim
+USER root
+RUN chown -R devuser:devuser /home/devuser/.config
+USER devuser
 #run plug install
-RUN nvim --headless +PlugInstall +qall
+RUN nvim --headless +silent +PlugInstall +qall
 
 ENV TERM xterm-256color
 CMD ["zsh"]
