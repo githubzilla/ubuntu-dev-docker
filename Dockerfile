@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:21.10
 LABEL maintainer="githubzilla"
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -14,7 +14,10 @@ RUN apt-get install -y zsh
 RUN apt-get install -y fonts-powerline
 RUN apt-get install -y llvm
 RUN apt-get install -y llvm-dev
+RUN apt-get install -y clang
+RUN apt-get install -y clangd
 RUN apt-get install -y build-essential
+RUN apt-get install -y ranger
 RUN apt-get install -y software-properties-common
 RUN add-apt-repository ppa:neovim-ppa/unstable
 RUN apt-get update
@@ -35,6 +38,8 @@ RUN /home/devuser/rustup.sh -y
 RUN rm /home/devuser/rustup.sh
 RUN . /home/devuser/.cargo/env && rustup toolchain install nightly
 RUN . /home/devuser/.cargo/env && rustup default nightly
+RUN . /home/devuser/.cargo/env && rustup component add rust-src
+RUN . /home/devuser/.cargo/env && rustup +nightly component add rust-analyzer-preview
 
 #setup oh-my-zsh
 RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
@@ -59,9 +64,19 @@ USER devuser
 #run plug install
 RUN nvim --headless +silent +PlugInstall +qall
 
+#install nvm
+USER root
+RUN mkdir /usr/local/nvm
+ENV NVM_DIR /usr/local/nvm
+ENV NODE_VERSION 17.2.0
+RUN wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+# install node and npm
+RUN . $NVM_DIR/nvm.sh \
+    && nvm install $NODE_VERSION \
+    && nvm alias default $NODE_VERSION \
+    && nvm use default \
+    && npm install -g typescript
+
+USER devuser
 ENV TERM xterm-256color
 CMD ["zsh"]
-
-
-
-

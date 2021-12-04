@@ -11,9 +11,15 @@ export CXXFLAGS="-Wall -Wextra -isysroot $SDKROOT `llvm-config --cxxflags`"
 #Add llvm lib to LD_LIBRARY_PATH
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/llvm/lib"
 
+#NVM
+export NVM_DIR="/usr/local/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
 #alias nvim to vi
 alias vi='nvim'
 alias v='nvim'
+#alias rust-analyzer
+alias rust-analyzer='rustup run nightly rust-analyzer'
 #set vi as the terminal editor
 set -o vi
 
