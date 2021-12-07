@@ -19,7 +19,19 @@ RUN make install-world
 #update profile
 ADD --chown=devuser:devuser files/dotprofile.postgresql /home/devuser/.profile
 
-WORKDIR /home/devuser
+#
+RUN rm -rf /home/devuser/postgresql-13.5.tar
+RUN chown devuser:devuser /home/devuser/postgresql-13.5
+
+#create database
 USER devuser
+RUN mkdir /home/devuser/pgdata
+RUN . /home/devuser/.profile && initdb -D /home/devuser/pgdata --username devuser
+
+#add postgresql script
+ADD --chown=devuser:devuser --chmod=777 files/startdb.sh /home/devuser/startdb.sh
+ADD --chown=devuser:devuser --chmod=777 files/psql.sh /home/devuser/psql.sh
+
+WORKDIR /home/devuser
 ENV TERM xterm-256color
 CMD ["zsh"]
