@@ -19,4 +19,7 @@ RUN make install-world
 #update profile
 ADD --chown=devuser:devuser files/dotprofile.postgresql /home/devuser/.profile
 
-
+WORKDIR /home/devuser
+USER devuser
+ENV TERM xterm-256color
+CMD ["zsh"]
