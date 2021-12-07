@@ -52,4 +52,4 @@ Mkfile.old
 dkms.conf
 
 # vim history
-.local-history
+.local-history/*

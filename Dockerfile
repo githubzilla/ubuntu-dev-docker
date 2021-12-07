@@ -77,6 +77,7 @@ RUN . $NVM_DIR/nvm.sh \
     && nvm use default \
     && npm install -g typescript
 
+
 USER devuser
 ENV TERM xterm-256color
 CMD ["zsh"]
