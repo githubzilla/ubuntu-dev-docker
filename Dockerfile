@@ -62,7 +62,7 @@ USER root
 RUN chown -R devuser:devuser /home/devuser/.config
 USER devuser
 #run plug install
-RUN nvim --headless +silent +PlugInstall +TSInstall rust c cpp javascript css html +qall
+RUN nvim --headless +silent +PlugInstall +qall
 #run treesitter Install
 RUN nvim --headless +silent +TSInstall rust c cpp javascript css html +qall
 
