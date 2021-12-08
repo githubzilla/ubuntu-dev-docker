@@ -58,7 +58,7 @@ ADD --chown=${USER}:${USER} files/dotp10k.zsh /home/${USER}/.p10k.zsh
 ADD --chown=${USER}:${USER} files/dotprofile /home/${USER}/.profile
 
 #Install vim-plug for neovim
-RUN sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+RUN sh -c 'curl -fLo "/home/${USER}/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 #add neovim config files
 ADD --chown=${USER}:${USER} files/nvim /home/${USER}/.config/nvim
