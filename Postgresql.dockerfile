@@ -1,4 +1,4 @@
-FROM xj4reg/ubuntu-dev:1.0
+FROM xj4reg/ubuntu-dev:latest
 
 USER root
 #install dependences
