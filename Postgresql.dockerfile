@@ -1,5 +1,7 @@
 FROM xj4reg/ubuntu-dev:latest
 
+ARG USER=devuser
+
 USER root
 #install dependences
 RUN sudo apt-get install -y libreadline-dev zlib1g-dev flex bison libxml2-dev libxslt-dev libssl-dev libxml2-utils xsltproc
