@@ -1,7 +1,11 @@
 FROM ubuntu:21.10
 LABEL maintainer="githubzilla"
 
+ARG USER=devuser
+ARG PW=passwd01
+
 ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update
 RUN apt-get install -y sudo
 RUN apt-get install -y iputils-ping
