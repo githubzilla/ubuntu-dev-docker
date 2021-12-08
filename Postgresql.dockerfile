@@ -9,19 +9,27 @@ WORKDIR /home/devuser
 RUN wget https://ftp.postgresql.org/pub/source/v13.5/postgresql-13.5.tar.gz
 RUN gunzip postgresql-13.5.tar.gz
 RUN tar xf postgresql-13.5.tar
+RUN mv /home/devuser/postgresql-13.5 /home/devuser/postgresql
+
+#install bear
+RUN apt-get install -y bear
+RUN apt-get install -y python3-pip
+RUN pip install compdb
 
 #make
-WORKDIR /home/devuser/postgresql-13.5
+WORKDIR /home/devuser/postgresql
 RUN ./configure
-RUN make world
+RUN bear -- make world
 RUN make install-world
+RUN compdb -p ./ list > compile_commands.compdb.json
+RUN mv compile_commands.compdb.json compile_commands.json
 
 #update profile
 ADD --chown=devuser:devuser files/dotprofile.postgresql /home/devuser/.profile
 
-#
-RUN rm -rf /home/devuser/postgresql-13.5.tar
-RUN chown devuser:devuser /home/devuser/postgresql-13.5
+#clean up
+#RUN rm -rf /home/devuser/postgresql-13.5.tar
+RUN chown devuser:devuser /home/devuser/postgresql
 
 #create database
 USER devuser
@@ -31,6 +39,7 @@ RUN . /home/devuser/.profile && initdb -D /home/devuser/pgdata --username devuse
 #add postgresql script
 ADD --chown=devuser:devuser --chmod=777 files/startdb.sh /home/devuser/startdb.sh
 ADD --chown=devuser:devuser --chmod=777 files/psql.sh /home/devuser/psql.sh
+ADD --chown=devuser:devuser files/clangd /home/devuser/.config/clangd
 
 WORKDIR /home/devuser
 ENV TERM xterm-256color
