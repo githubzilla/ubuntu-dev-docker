@@ -8,9 +8,7 @@ RUN sudo apt-get install -y libreadline-dev zlib1g-dev flex bison libxml2-dev li
 
 #get source
 WORKDIR /home/${USER}
-RUN wget https://ftp.postgresql.org/pub/source/v13.5/postgresql-13.5.tar.gz
-RUN gunzip postgresql-13.5.tar.gz
-RUN tar xf postgresql-13.5.tar
+ADD --chown=${USER}:${USER} files/postgresql-13.5.tar.gz /home/${USER}/
 RUN mv /home/${USER}/postgresql-13.5 /home/${USER}/postgresql
 
 #install bear
@@ -40,6 +38,7 @@ RUN . /home/${USER}/.profile && initdb -D /home/${USER}/pgdata --username ${USER
 
 #add postgresql script
 ADD --chown=${USER}:${USER} --chmod=777 files/startdb.sh /home/${USER}/startdb.sh
+ADD --chown=${USER}:${USER} --chmod=777 files/stopdb.sh /home/${USER}/stopdb.sh
 ADD --chown=${USER}:${USER} --chmod=777 files/psql.sh /home/${USER}/psql.sh
 ADD --chown=${USER}:${USER} files/clangd /home/${USER}/.config/clangd
 
