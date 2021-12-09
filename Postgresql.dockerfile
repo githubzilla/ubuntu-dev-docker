@@ -6,15 +6,15 @@ USER root
 #install dependences
 RUN sudo apt-get install -y libreadline-dev zlib1g-dev flex bison libxml2-dev libxslt-dev libssl-dev libxml2-utils xsltproc
 
-#get source
-WORKDIR /home/${USER}
-ADD --chown=${USER}:${USER} files/postgresql-13.5.tar.gz /home/${USER}/
-RUN mv /home/${USER}/postgresql-13.5 /home/${USER}/postgresql
-
 #install bear
 RUN apt-get install -y bear
 RUN apt-get install -y python3-pip
 RUN pip install compdb
+
+#get source
+WORKDIR /home/${USER}
+ADD --chown=${USER}:${USER} files/postgresql-14.1.tar.gz /home/${USER}/
+RUN mv /home/${USER}/postgresql-14.1 /home/${USER}/postgresql
 
 #make
 WORKDIR /home/${USER}/postgresql
@@ -23,6 +23,7 @@ RUN bear -- make world
 RUN make install-world
 RUN compdb -p ./ list > compile_commands.compdb.json
 RUN mv compile_commands.compdb.json compile_commands.json
+RUN make clean
 
 #update profile
 ADD --chown=${USER}:${USER} files/dotprofile.postgresql /home/${USER}/.profile
