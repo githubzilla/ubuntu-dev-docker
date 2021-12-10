@@ -1,4 +1,4 @@
-FROM xj4reg/ubuntu-dev:latest
+FROM registry-vpc.cn-hongkong.aliyuncs.com/xj4reg/ubuntu-dev:latest
 
 ARG USER=devuser
 
