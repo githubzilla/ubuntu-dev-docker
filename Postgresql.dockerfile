@@ -35,13 +35,13 @@ RUN chown ${USER}:${USER} /home/${USER}/postgresql
 #create database
 USER ${USER}
 RUN mkdir /home/${USER}/pgdata
-RUN . /home/${USER}/.profile && initdb -D /home/${USER}/pgdata --username ${USER}
+RUN . /home/${USER}/.profile && initdb -D /home/${USER}/pgdata --username ${USER} --encoding=UTF-8
 
 #add postgresql script
 ADD --chown=${USER}:${USER} --chmod=777 files/startdb.sh /home/${USER}/startdb.sh
 ADD --chown=${USER}:${USER} --chmod=777 files/stopdb.sh /home/${USER}/stopdb.sh
 ADD --chown=${USER}:${USER} --chmod=777 files/psql.sh /home/${USER}/psql.sh
-ADD --chown=${USER}:${USER} files/clangd /home/${USER}/.config/clangd
+ADD --chown=${USER}:${USER} files/clangd/config.yaml /home/${USER}/.config/clangd/config.yaml
 
 WORKDIR /home/${USER}
 ENV TERM xterm-256color
