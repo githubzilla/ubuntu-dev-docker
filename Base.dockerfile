@@ -23,7 +23,9 @@ RUN apt-get install -y clangd
 RUN apt-get install -y build-essential
 RUN apt-get install -y ranger
 RUN apt-get install -y software-properties-common
-RUN add-apt-repository ppa:neovim-ppa/unstable
+RUN apt-get install -y ripgrep
+RUN apt-get install -y fd-find
+RUN add-apt-repository ppa:neovim-ppa/stable
 RUN apt-get update
 RUN apt-get install -y neovim
 

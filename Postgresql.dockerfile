@@ -13,8 +13,8 @@ RUN pip install compdb
 
 #get source
 WORKDIR /home/${USER}
-ADD --chown=${USER}:${USER} files/postgresql-14.1.tar.gz /home/${USER}/
-RUN mv /home/${USER}/postgresql-14.1 /home/${USER}/postgresql
+ADD --chown=${USER}:${USER} files/postgresql-13.5.tar.gz /home/${USER}/
+RUN mv /home/${USER}/postgresql-13.5 /home/${USER}/postgresql
 
 #make
 WORKDIR /home/${USER}/postgresql
