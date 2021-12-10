@@ -30,7 +30,7 @@ ADD --chown=${USER}:${USER} files/dotprofile.postgresql /home/${USER}/.profile
 
 #clean up
 #RUN rm -rf /home/${USER}/postgresql-13.5.tar
-RUN chown ${USER}:${USER} /home/${USER}/postgresql
+RUN chown -R ${USER}:${USER} /home/${USER}/postgresql
 
 #create database
 USER ${USER}
