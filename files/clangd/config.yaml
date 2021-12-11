@@ -1,4 +1,4 @@
 If:                               # Apply this config conditionally
-  PathMatch: .*\.h                # to all headers...
+  PathMatch: .*\.*                # to all headers and c files...
 CompileFlags:                     # Tweak the parse settings
-  Add: [-include postgres.h]
+  Add: [-include postgres.h, -include relcache.h]
