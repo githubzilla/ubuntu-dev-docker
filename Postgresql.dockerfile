@@ -1,4 +1,6 @@
-FROM registry-vpc.cn-hongkong.aliyuncs.com/xj4reg/ubuntu-dev:latest
+ARG BASE_IMAGE=xj4reg/ubuntu-dev:latest
+ARG BASE_IMAGE=registry-vpc.cn-hongkong.aliyuncs.com/xj4reg/ubuntu-dev:latest
+FROM ${BASE_IMAGE}
 
 ARG USER=devuser
 

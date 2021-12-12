@@ -1,4 +1,5 @@
-FROM ubuntu:21.10
+ARG BASE_IMAGE=ubuntu:21.10
+FROM ${BASE_IMAGE}
 LABEL maintainer="githubzilla"
 
 ARG USER=devuser
