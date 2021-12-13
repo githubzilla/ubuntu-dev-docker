@@ -92,6 +92,9 @@ Plug 'hrsh7th/vim-vsnip'
 " Optional
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
+" navigator - conflict with other lsp plugins
+"Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
+"Plug 'ray-x/navigator.lua'
 
 "== rust.vim
 Plug 'rust-lang/rust.vim'
@@ -151,6 +154,9 @@ silent! source ~/.config/nvim/lsp_signature.vim
 
 "== nvim-cmp.vim
 silent! source ~/.config/nvim/nvim-cmp.vim
+
+"== navigator.vim
+"silent! source ~/.config/nvim/navigator.vim
 
 "== ccls.vim
 "source ~/.config/nvim/ccls.vim

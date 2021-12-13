@@ -8,12 +8,14 @@ set completeopt=menuone,noinsert,noselect
 " Avoid showing extra messages when using completion
 set shortmess+=c
 
+" rust-tools setup combined into lspconfig.=vim
+
 " Configure LSP through rust-tools.nvim plugin.
 " rust-tools will configure and enable certain LSP features for us.
 " See https://github.com/simrat39/rust-tools.nvim#configuration
-lua <<EOF
-require('rust-tools').setup()
-EOF
+"lua <<EOF
+"require('rust-tools').setup()
+"EOF
 
 " Setup Completion
 " See https://github.com/hrsh7th/nvim-cmp#basic-configuration
