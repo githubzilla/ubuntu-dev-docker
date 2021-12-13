@@ -55,6 +55,7 @@ Plug 'rizzatti/dash.vim'
 "== telescope
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-live-grep-raw.nvim'
 
 "== treesitter, disabled since it's not work under coc.vim
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
@@ -101,6 +102,9 @@ Plug 'rust-lang/rust.vim'
 
 "== which key
 Plug 'folke/which-key.nvim'
+
+"== vista function/variable outline
+Plug 'liuchengxu/vista.vim'
 
 "== ctrlspace
 Plug 'vim-ctrlspace/vim-ctrlspace'
@@ -170,3 +174,5 @@ silent! source ~/.config/nvim/which_key.vim
 "== ctrlspace
 silent! source ~/.config/nvim/vim-ctrlspace.vim
 
+"== vista
+silent! source ~/.config/nvim/vista.vim
