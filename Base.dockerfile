@@ -27,6 +27,7 @@ RUN apt-get install -y software-properties-common
 RUN apt-get install -y ripgrep
 RUN apt-get install -y fd-find
 RUN apt-get install -y pkg-config #require by clap-nvim
+RUN apt-get install -y trash-cli
 
 #install latest neovim
 RUN curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage

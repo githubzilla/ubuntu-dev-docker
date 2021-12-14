@@ -24,3 +24,6 @@ alias rust-analyzer='rustup run nightly rust-analyzer'
 set -o vi
 
 . "$HOME/.cargo/env"
+
+#disable trash
+alias rm="echo Use 'trash', or the full path i.e. '/bin/rm'"
