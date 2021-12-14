@@ -26,9 +26,13 @@ RUN apt-get install -y ranger
 RUN apt-get install -y software-properties-common
 RUN apt-get install -y ripgrep
 RUN apt-get install -y fd-find
-RUN add-apt-repository ppa:neovim-ppa/stable
-RUN apt-get update
-RUN apt-get install -y neovim
+
+#install latest neovim
+RUN curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+RUN chmod u+x nvim.appimage
+RUN ./nvim.appimage --appimage-extract
+RUN rm -f nvim.appimage
+RUN ln -s /squashfs-root/AppRun /usr/bin/nvim
 
 #add developer user account
 RUN adduser --quiet --disabled-password --shell /bin/zsh --home /home/${USER} --gecos "User" ${USER} && \
