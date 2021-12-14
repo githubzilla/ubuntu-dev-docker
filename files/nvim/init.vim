@@ -93,9 +93,15 @@ Plug 'hrsh7th/vim-vsnip'
 " Optional
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
+" Debug -- don't use dap, it's kind of premature
+"Plug 'mfussenegger/nvim-dap'
+"Plug 'rcarriga/nvim-dap-ui'
 " navigator - conflict with other lsp plugins
 "Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
 "Plug 'ray-x/navigator.lua'
+
+" vimspector
+Plug 'puremourning/vimspector'
 
 "== rust.vim
 Plug 'rust-lang/rust.vim'
@@ -111,6 +117,11 @@ Plug 'vim-ctrlspace/vim-ctrlspace'
 
 "== unimpaired
 Plug 'tpope/vim-unimpaired'
+
+"== vim-clap
+" Build the extra binary if cargo exists on your system.
+Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
+
 
 call plug#end()
 
@@ -175,4 +186,9 @@ silent! source ~/.config/nvim/which_key.vim
 silent! source ~/.config/nvim/vim-ctrlspace.vim
 
 "== vista
-silent! source ~/.config/nvim/vista.vim
+source ~/.config/nvim/vista.vim
+
+"== vim-dap-ui
+"source ~/.config/nvim/dapui.vim
+"== vimspector
+source ~/.config/nvim/vimspector.vim

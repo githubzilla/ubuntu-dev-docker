@@ -43,6 +43,11 @@ end
 --        debounce_text_changes = 150,
 --      }
 -- }
+
+-- local extension_path = '/Users/tianxj/.vscode/extensions/codelldb-aarch64-darwin.vsix/extension/'
+-- local codelldb_path = extension_path .. 'adapter/codelldb'
+-- local liblldb_path = extension_path .. 'lldb/lib/liblldb.dylib'
+
 local opts = {
     tools = { -- rust-tools options
         -- Automatically set inlay hints (type hints)
@@ -148,14 +153,15 @@ local opts = {
              debounce_text_changes = 150,
         }, -- rust-analyer options
 
-    -- debugging stuff
-    dap = {
-        adapter = {
-            type = 'executable',
-            command = 'lldb-vscode',
-            name = "rt_lldb"
-        }
-    }
+    -- debugging stuff -- use vimspector instead
+    -- dap = {
+    --         -- adapter = require('rust-tools.dap').get_codelldb_adapter(codelldb_path, liblldb_path)
+    --         adapter = {
+    --             type = 'executable',
+    --             command = '/opt/homebrew/Cellar/llvm/13.0.0_1/Toolchains/LLVM13.0.0.xctoolchain/usr/bin/lldb-vscode',
+    --             name = "rt_lldb"
+    --         }
+    --     }
 }
 
 require('rust-tools').setup(opts)
