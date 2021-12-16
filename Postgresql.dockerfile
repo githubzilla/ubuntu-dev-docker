@@ -29,6 +29,8 @@ RUN make clean
 
 #update profile
 ADD --chown=${USER}:${USER} files/dotprofile.postgresql /home/${USER}/.profile
+#add .inputrc
+ADD --chown=${USER}:${USER} files/dotinputrc /home/${USER}/.inputrc
 
 #clean up
 #RUN rm -rf /home/${USER}/postgresql-13.5.tar
