@@ -28,6 +28,9 @@ RUN apt-get install -y ripgrep
 RUN apt-get install -y fd-find
 RUN apt-get install -y pkg-config #require by clap-nvim
 RUN apt-get install -y trash-cli
+RUN apt-get install -y tmux
+RUN apt-get install -y pandoc
+RUN apt-get install -y lynx
 
 #install latest neovim
 RUN curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
