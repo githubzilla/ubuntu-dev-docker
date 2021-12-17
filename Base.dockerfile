@@ -39,7 +39,7 @@ RUN chmod u+x nvim.appimage
 RUN ./nvim.appimage --appimage-extract
 RUN rm -f nvim.appimage
 RUN ln -s /squashfs-root/AppRun /usr/bin/nvim
-RUN pip install -y pynvim #require by vimspector
+RUN pip install pynvim #require by vimspector
 
 #add developer user account
 RUN adduser --quiet --disabled-password --shell /bin/zsh --home /home/${USER} --gecos "User" ${USER} && \
