@@ -31,6 +31,7 @@ RUN apt-get install -y trash-cli
 RUN apt-get install -y tmux
 RUN apt-get install -y pandoc
 RUN apt-get install -y lynx
+RUN apt-get install -y python3-pip
 
 #install latest neovim
 RUN curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
