@@ -31,6 +31,7 @@ RUN apt-get install -y trash-cli
 RUN apt-get install -y tmux
 RUN apt-get install -y pandoc
 RUN apt-get install -y lynx
+RUN apt-get install -y python3-pip
 
 #install latest neovim
 RUN curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
@@ -38,7 +39,7 @@ RUN chmod u+x nvim.appimage
 RUN ./nvim.appimage --appimage-extract
 RUN rm -f nvim.appimage
 RUN ln -s /squashfs-root/AppRun /usr/bin/nvim
-RUN pip install -y pynvim #require by vimspector
+RUN pip install pynvim #require by vimspector
 
 #add developer user account
 RUN adduser --quiet --disabled-password --shell /bin/zsh --home /home/${USER} --gecos "User" ${USER} && \
