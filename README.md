@@ -29,7 +29,6 @@
 - compdb
 - nvm
 - node
-- 
 
 ## Neovim configuration
 
