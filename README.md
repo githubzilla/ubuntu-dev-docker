@@ -1,6 +1,11 @@
-# ubuntu-dev-docker
-C/C++/Rust Development Environment on Ubuntu
-
+# Development environment setup for C/C++/Rust
+- Base.dockerfile
+  * C/C++/Rust Development Environment on Ubuntu
+- Postgresql.dockerfile
+  * Having postgresql source compiled and installed
+- Pglogical.dockerfile
+  * Having pglogical source compiled and installed
+  
 ## Preindstalled packages
 
 - wget
