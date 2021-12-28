@@ -21,6 +21,8 @@ RUN apt-get install -y llvm
 RUN apt-get install -y llvm-dev
 RUN apt-get install -y clang
 RUN apt-get install -y clangd
+RUN apt-get install -y gdb
+RUN apt-get install -y lldb
 RUN apt-get install -y build-essential
 RUN apt-get install -y ranger
 RUN apt-get install -y software-properties-common
@@ -32,13 +34,11 @@ RUN apt-get install -y tmux
 RUN apt-get install -y pandoc
 RUN apt-get install -y lynx
 RUN apt-get install -y python3-pip
+RUN apt-get install -y elfutils
 
 #install latest neovim
-RUN curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-RUN chmod u+x nvim.appimage
-RUN ./nvim.appimage --appimage-extract
-RUN rm -f nvim.appimage
-RUN ln -s /squashfs-root/AppRun /usr/bin/nvim
+ADD files/nvim-0.6.1.tar.gz /
+RUN ln -s /nvim/bin/nvim /usr/bin/nvim
 RUN pip install pynvim #require by vimspector
 
 #add developer user account
