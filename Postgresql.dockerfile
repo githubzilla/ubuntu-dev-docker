@@ -6,12 +6,7 @@ ARG USER=devuser
 
 USER root
 #install dependences
-RUN sudo apt-get install -y libreadline-dev zlib1g-dev flex bison libxml2-dev libxslt-dev libssl-dev libxml2-utils xsltproc
-
-#install bear
-RUN apt-get install -y bear
-RUN apt-get install -y python3-pip
-RUN pip install compdb
+RUN sudo apt-get install -y libreadline-dev zlib1g-dev flex bison libxml2-dev libxslt-dev libssl-dev libxml2-utils xsltproc bear python3-pip && pip install compdb
 
 #get source
 WORKDIR /home/${USER}
@@ -20,12 +15,7 @@ RUN mv /home/${USER}/postgresql-13.5 /home/${USER}/postgresql
 
 #make
 WORKDIR /home/${USER}/postgresql
-RUN ./configure
-RUN bear -- make world
-RUN make install-world
-RUN compdb -p ./ list > compile_commands.compdb.json
-RUN mv compile_commands.compdb.json compile_commands.json
-RUN make clean
+RUN ./configure && bear -- make world && make install-world && compdb -p ./ list > compile_commands.compdb.json && mv compile_commands.compdb.json compile_commands.json && make clean
 
 #update profile
 ADD --chown=${USER}:${USER} files/dotprofile.postgresql /home/${USER}/.profile
