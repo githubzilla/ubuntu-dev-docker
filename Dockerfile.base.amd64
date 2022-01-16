@@ -1,0 +1,67 @@
+ARG BASE_IMAGE=ubuntu:21.10
+FROM ${BASE_IMAGE}
+LABEL maintainer="githubzilla"
+
+ARG PASSWD=passwd01
+
+USER root
+WORKDIR /root
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN echo "root:$PASSWD" | chpasswd
+
+RUN apt-get update && apt-get install -y sudo iputils-ping net-tools wget curl telnet git zsh fonts-powerline llvm llvm-dev clang clangd gdb lldb build-essential ranger software-properties-common ripgrep fd-find pkg-config trash-cli tmux pandoc lynx python3-pip elfutils gosu
+
+#add ENTRYPOINT
+ADD files/entrypoint.sh /
+RUN chmod +x /entrypoint.sh
+
+#install latest neovim
+ADD files/nvim-0.6.1-arm64.tar.gz /
+RUN ln -s /nvim/bin/nvim /usr/bin/nvim && pip install pynvim #require by vimspector
+
+#Install rust
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > /root/rustup.sh 
+RUN chmod +x /root/rustup.sh && /root/rustup.sh -y && rm /root/rustup.sh
+RUN . /root/.cargo/env && \
+    rustup toolchain install nightly && \
+    rustup default nightly && \
+    rustup component add rust-src && \
+    rustup +nightly component add rust-analyzer-preview
+
+#setup oh-my-zsh
+RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh && \
+    git clone https://github.com/zsh-users/zsh-autosuggestions /home/${USER}/.oh-my-zsh/custom/plugins/zsh-autosuggestions && \
+    git clone https://github.com/romkatv/powerlevel10k.git && \
+    /root/powerlevel10k/gitstatus/install
+# run gitstatusd install when docker build rather than postpone to the actuall run time  
+
+#add oh-my-zsh config files
+ADD files/dotzshrc /root/.zshrc
+ADD files/dotp10k.zsh /root/.p10k.zsh
+ADD files/dotprofile /root/.profile
+
+#Install vim-plug for neovim
+RUN mkdir -p /root/.local/share/nvim/site/autoload
+ADD files/plug.vim /root/.local/share/nvim/site/autoload/plug.vim
+
+#add neovim config files
+ADD files/nvim /root/.config/nvim
+#run plug install
+RUN nvim --headless +silent +PlugInstall +qall && nvim --headless +silent +TSInstall rust c cpp javascript css html +qall
+
+#install nvm
+RUN mkdir /usr/local/nvm
+ENV NVM_DIR /usr/local/nvm
+ENV NODE_VERSION 17.2.0
+RUN wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+# install node and npm
+RUN . $NVM_DIR/nvm.sh \
+    && nvm install $NODE_VERSION \
+    && nvm alias default $NODE_VERSION \
+    && nvm use default \
+    && npm install -g typescript
+
+ENV TERM xterm-256color
+ENTRYPOINT ["/startup.sh"]
+CMD ["zsh"]
