@@ -18,7 +18,7 @@ RUN chmod +x /entrypoint.sh
 
 #install latest neovim
 ADD files/nvim-0.6.1-amd64.tar.gz /
-RUN ln -s /nvim/bin/nvim /usr/bin/nvim && pip install pynvim #require by vimspector
+RUN ln -s /nvim-linux64/bin/nvim /usr/bin/nvim && pip install pynvim #require by vimspector
 
 #Install rust
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > /root/rustup.sh 
@@ -63,5 +63,5 @@ RUN . $NVM_DIR/nvm.sh \
     && npm install -g typescript
 
 ENV TERM xterm-256color
-ENTRYPOINT ["/startup.sh"]
-CMD ["zsh"]
+#ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/bin/zsh"]
